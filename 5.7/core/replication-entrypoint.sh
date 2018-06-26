@@ -57,6 +57,7 @@ fi
 cat > /etc/mysql/mysql.conf.d/server-id.cnf << EOF
 [mysqld]
 server-id=$SERVER_ID
+binlog-format=ROW
 EOF
 
 exec docker-entrypoint.sh "$@"
