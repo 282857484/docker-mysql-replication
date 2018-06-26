@@ -13,7 +13,9 @@
 ```
 docker run -d \
  --name mysql_master \
- -v /data/mastermysql:/var/lib/mysql \
+ -v /Users/yons/data/master:/var/lib/mysql \
+ --net=bridge \
+ -p 40001:3306 \
  -e MYSQL_ROOT_PASSWORD=mysqlroot \
  -e MYSQL_USER=example_user \
  -e MYSQL_PASSWORD=mysqlpwd \
@@ -29,7 +31,11 @@ docker run -d \
 ```
 docker run -d \
  --name mysql_slave \
- -v /data/slavemysql:/var/lib/mysql \
+ -v /Users/yons/data/slave:/var/lib/mysql \
+ --net=bridge \
+ -p 40002:3306 \
+ -e MASTER_PORT=40001 \
+ -e MASTER_HOST=10.1.1.1 \
  -e MYSQL_ROOT_PASSWORD=mysqlroot \
  -e MYSQL_USER=example_user \
  -e MYSQL_PASSWORD=mysqlpwd \
